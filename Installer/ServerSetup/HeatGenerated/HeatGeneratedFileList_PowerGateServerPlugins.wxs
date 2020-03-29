@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Fragment>
+        <DirectoryRef Id="DYNAMICS_NAV">
+            <Component Id="cmpFAFF9F1B136267A4D1D3F332F91975E4" Guid="{917E68FB-8EE0-413C-BD82-99574006DD17}">
+                <File Id="filD41B66C2CE1CC1DE280B1A7B26E82E35" KeyPath="yes" Source="$(var.HarvestPowerGateServer)\DynamicsNav.Plugin.addin" />
+            </Component>
+            <Component Id="cmp1CB1237395463F5DBA2E24A74D163C3B" Guid="{E5F6D637-62E7-4DD2-8640-087CDC96D389}">
+                <File Id="fil54F818EDCA07450DE93228211F44E85C" KeyPath="yes" Source="$(var.HarvestPowerGateServer)\DynamicsNav.Plugin.dll" />
+            </Component>
+            <Component Id="cmpE9F9299B41F7719DC925295C93B0730C" Guid="{5ABE3084-E921-400E-8813-C23891E96407}">
+                <File Id="fil7067C54E3D4291523D47EDD86621327B" KeyPath="yes" Source="$(var.HarvestPowerGateServer)\powerGateServer.SDK.dll" />
+            </Component>
+            <Component Id="cmp2AF0D9FFAE0A8455E3E02CED815CFBE0" Guid="{70F64016-C848-4E96-A570-3538BACA3030}">
+                <File Id="fil020065E76074F0F75227B2208BF07F86" KeyPath="yes" Source="$(var.HarvestPowerGateServer)\DynamicsNav.Plugin.dll.config" />
+            </Component>
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <ComponentGroup Id="HeatGenerated_PowerGateServerPlugins">
+            <ComponentRef Id="cmpFAFF9F1B136267A4D1D3F332F91975E4" />
+            <ComponentRef Id="cmp1CB1237395463F5DBA2E24A74D163C3B" />
+            <ComponentRef Id="cmpE9F9299B41F7719DC925295C93B0730C" />
+            <ComponentRef Id="cmp2AF0D9FFAE0A8455E3E02CED815CFBE0" />
+        </ComponentGroup>
+    </Fragment>
+</Wix>
