@@ -1,5 +1,8 @@
 ﻿using System.Configuration;
+using System.Linq;
 using System.Reflection;
+using System.ServiceModel;
+using System.ServiceModel.Configuration;
 using powerGateServer.SDK;
 
 namespace DynamicsNav.Plugin
@@ -12,10 +15,13 @@ namespace DynamicsNav.Plugin
 
         public WebService()
         {
-            AddMethod(new Materials());
             AddMethod(new BomHeaders());
             AddMethod(new BomRows());
+            AddMethod(new Categories());
             AddMethod(new Documents());
+            AddMethod(new Materials());
+            AddMethod(new UnitsOfMeasure());
+            AddMethod(new Vendors());
         }
 
         static WebService()
@@ -27,6 +33,23 @@ namespace DynamicsNav.Plugin
             if (section == null) return;
             FileStorageLocation = section.Settings["FileStorageLocation"].Value;
             NoSeriesCode = section.Settings["NoSeriesCode"].Value;
+        }
+
+
+        public static System.ServiceModel.Description.ServiceEndpoint GetServiceEndpoint<T>() where T : IClientChannel
+        {
+            var configFullName = Assembly.GetExecutingAssembly().Location + ".config";
+            var configuration = ConfigurationManager.OpenMappedExeConfiguration(new ExeConfigurationFileMap { ExeConfigFilename = configFullName }, ConfigurationUserLevel.None);
+
+            var channelType = typeof(T);
+            var contractType = channelType.GetInterfaces().First(i => i.Namespace == channelType.Namespace);
+            var contractAttribute = contractType.GetCustomAttributes(typeof(ServiceContractAttribute), false).First() as ServiceContractAttribute;
+
+            var serviceModelSectionGroup = ServiceModelSectionGroup.GetSectionGroup(configuration);
+            var channelEndpointElement = serviceModelSectionGroup?.Client.Endpoints.OfType<ChannelEndpointElement>().First(e => e.Contract == contractAttribute?.ConfigurationName);
+            var channelFactory = new ConfigurationChannelFactory<T>(channelEndpointElement.Name, configuration, null);
+
+            return channelFactory.Endpoint;
         }
     }
 }

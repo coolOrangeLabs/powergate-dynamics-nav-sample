@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Services.Common;
+using DynamicsNav.Plugin.Helper;
+using DynamicsNav.Plugin.SOAP.ItemCard;
 using powerGateServer.SDK;
 
 namespace DynamicsNav.Plugin
@@ -17,12 +19,9 @@ namespace DynamicsNav.Plugin
         public bool IsBlocked { get; set; }
         public string Category { get; set; }
         public string Shelf { get; set; }
-        public double Weight { get; set; }
+        public decimal Weight { get; set; }
         public string Dimensions { get; set; }
-        public bool IsVendorSpecified {
-            get => !string.IsNullOrEmpty(VendorNumber);
-            set => _ = value;
-        }
+        public bool IsVendorSpecified { get; set; }
         public string VendorNumber { get; set; }
         public string VendorName { get; set; }
         public string VendorItemNumber { get; set; }
@@ -80,12 +79,60 @@ namespace DynamicsNav.Plugin
 
         public override IEnumerable<Material> Query(IExpression<Material> expression)
         {
-            throw new NotImplementedException();
+            var results = new List<Material>();
+            var filterArray = new List<ItemCard_Filter>();
+            foreach (var w in expression.Where)
+            {
+                var fieldEnum = GetFieldEnum(w.PropertyName);
+                if (fieldEnum == null) continue;
+
+                filterArray.Add(new ItemCard_Filter
+                {
+                    Field = fieldEnum.Value, 
+                    Criteria = GetCriteriaByOperator(w.Operator, w.Value)
+                });
+            }
+
+            var top = expression.TopCount;
+            if (top > 100) top = 100;
+
+            var endpoint = WebService.GetServiceEndpoint<ItemCard_PortChannel>();
+            var client = new ItemCard_PortClient(endpoint.Binding, endpoint.Address);
+            var list = client.ReadMultiple(filterArray.ToArray(), null, top);
+            foreach (var item in list)
+                results.Add(item.ToPowerGateObject());
+
+            return results;
+        }
+
+        private ItemCard_Fields? GetFieldEnum(string propertyName)
+        {
+            switch (propertyName)
+            {
+                case "Description": return ItemCard_Fields.Description;
+                case "Number": return ItemCard_Fields.No;
+                default: return null;
+            }
+        }
+
+        private string GetCriteriaByOperator(OperatorType? op, object value)
+        {
+            switch (op)
+            {
+                case OperatorType.Equals: return value.ToString();
+                case OperatorType.EndsWith: return "*" + value;
+                case OperatorType.StartsWith: return value + "*"; 
+                case OperatorType.Contains: return "*" + value + "*";
+                default: return "*" + value + "*";
+            }
         }
 
         public override void Update(Material entity)
         {
-
+            var item = entity.ToErpObject();
+            var endpoint = WebService.GetServiceEndpoint<ItemCard_PortChannel>();
+            var client = new ItemCard_PortClient(endpoint.Binding, endpoint.Address);
+            client.Update(ref item);
         }
 
         public override void Create(Material entity)
@@ -93,12 +140,18 @@ namespace DynamicsNav.Plugin
             if (entity.Number.Equals("*"))
                 entity.Number = GetNextNumber();
 
-
+            var item = entity.ToErpObject();
+            var endpoint = WebService.GetServiceEndpoint<ItemCard_PortChannel>();
+            var client = new ItemCard_PortClient(endpoint.Binding, endpoint.Address);
+            client.Create(ref item);
         }
 
         public override void Delete(Material entity)
         {
-            throw new NotSupportedException();
+            var item = entity.ToErpObject();
+            var endpoint = WebService.GetServiceEndpoint<ItemCard_PortChannel>();
+            var client = new ItemCard_PortClient(endpoint.Binding, endpoint.Address);
+            client.Delete(item.Key);
         }
     }
 }

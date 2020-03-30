@@ -2,8 +2,14 @@
 #Disconnect-ERP -Service "http://$($ENV:Computername):8080/coolOrange/DynamicsNav"
 Connect-ERP -Service "http://$($ENV:Computername):8080/coolOrange/DynamicsNav"
 
+
+$categories = Get-ERPObjects -EntitySet "Categories"
+$unitsOfMeasure = Get-ERPObjects -EntitySet "UnitsOfMeasure"
+$vendors = Get-ERPObjects -EntitySet "Vendors"
+
+
 $materials = Get-ERPObjects -EntitySet "Materials"
-$material = Get-ERPObject -EntitySet "Materials" -Keys @{Number="4711"}
+$material = Get-ERPObject -EntitySet "Materials" -Keys @{Number="1000"}
 $newMaterial = New-ERPObject -EntityType "Material" -Properties @{ Number="4711";Description="test";UnitOfMeasure="KG";MaterialType="Alu"}
 $material = Add-ERPObject -EntitySet "Materials" -Properties $newMaterial
 $material = Update-ERPObject -EntitySet "Materials" -Keys @{Number="4711"} -Properties @{Description="changed"}

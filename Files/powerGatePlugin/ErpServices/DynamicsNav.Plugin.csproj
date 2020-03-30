@@ -53,6 +53,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Categories.cs" />
+    <Compile Include="UnitsOfMeasure.cs" />
+    <Compile Include="Vendors.cs" />
     <Compile Include="BomRows.cs" />
     <Compile Include="BomHeaders.cs" />
     <Compile Include="Connected Services\SOAP.BOMs\Reference.cs">
@@ -87,6 +90,7 @@
     </Compile>
     <Compile Include="Document.cs" />
     <Compile Include="Materials.cs" />
+    <Compile Include="Helper\ObjectMappingMethods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebService.cs" />
   </ItemGroup>
@@ -299,7 +303,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\SOAP.Vendors\Vendors.wsdl" />
-    <None Include="Test.ps1" />
+    <None Include="Test.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\SOAP.BOMs\configuration91.svcinfo" />
