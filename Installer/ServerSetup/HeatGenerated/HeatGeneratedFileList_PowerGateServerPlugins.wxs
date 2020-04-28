@@ -2,26 +2,40 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
     <Fragment>
         <DirectoryRef Id="DYNAMICS_NAV">
-            <Component Id="cmpFAFF9F1B136267A4D1D3F332F91975E4" Guid="{917E68FB-8EE0-413C-BD82-99574006DD17}">
+            <Component Id="cmpF9A19A624716EC2792CFAAAFB0B1DA6F" Guid="{0F0FA024-AE8E-47D8-8FED-92828C3CCC7E}">
+                <File Id="fil1256F633DF1289908AF1DAA3E642AF61" KeyPath="yes" Source="$(var.HarvestPowerGateServer)\Test.ps1" />
+            </Component>
+            <Component Id="cmpFAFF9F1B136267A4D1D3F332F91975E4" Guid="{20B22429-D15C-4B7F-BD73-ABD4C148E18F}">
                 <File Id="filD41B66C2CE1CC1DE280B1A7B26E82E35" KeyPath="yes" Source="$(var.HarvestPowerGateServer)\DynamicsNav.Plugin.addin" />
             </Component>
-            <Component Id="cmp1CB1237395463F5DBA2E24A74D163C3B" Guid="{E5F6D637-62E7-4DD2-8640-087CDC96D389}">
+            <Component Id="cmp1CB1237395463F5DBA2E24A74D163C3B" Guid="{CD03C9A8-DE2A-4FCC-9D82-6AAADCAB7167}">
                 <File Id="fil54F818EDCA07450DE93228211F44E85C" KeyPath="yes" Source="$(var.HarvestPowerGateServer)\DynamicsNav.Plugin.dll" />
             </Component>
-            <Component Id="cmpE9F9299B41F7719DC925295C93B0730C" Guid="{5ABE3084-E921-400E-8813-C23891E96407}">
+            <Component Id="cmpE9F9299B41F7719DC925295C93B0730C" Guid="{E23B5705-5587-4F0A-9CE2-8259F555F09F}">
                 <File Id="fil7067C54E3D4291523D47EDD86621327B" KeyPath="yes" Source="$(var.HarvestPowerGateServer)\powerGateServer.SDK.dll" />
             </Component>
-            <Component Id="cmp2AF0D9FFAE0A8455E3E02CED815CFBE0" Guid="{70F64016-C848-4E96-A570-3538BACA3030}">
+            <Component Id="cmp2AF0D9FFAE0A8455E3E02CED815CFBE0" Guid="{20C5C8A6-4B06-46E0-AB4E-F38A4386C935}">
                 <File Id="fil020065E76074F0F75227B2208BF07F86" KeyPath="yes" Source="$(var.HarvestPowerGateServer)\DynamicsNav.Plugin.dll.config" />
             </Component>
+            <Directory Id="dirF220E402E0776C55BA7BC869606CDC78" Name="Install">
+                <Component Id="cmpD7060DCB31E73FDFC031CBB3DAAAE9BE" Guid="{838026E8-B01D-4963-9B01-27703699B57E}">
+                    <File Id="filA7C3475B02B446381EE592FABDD6D463" KeyPath="yes" Source="$(var.HarvestPowerGateServer)\Install\Insert_Webservices.sql" />
+                </Component>
+                <Component Id="cmp185738740FFAB6C487AC890DA24A298B" Guid="{C0933F48-BCAF-45F1-BB94-A26707525312}">
+                    <File Id="filED5389D4A47ACDA2E6FB3673921FB833" KeyPath="yes" Source="$(var.HarvestPowerGateServer)\Install\Record Link Handler.fob" />
+                </Component>
+            </Directory>
         </DirectoryRef>
     </Fragment>
     <Fragment>
         <ComponentGroup Id="HeatGenerated_PowerGateServerPlugins">
+            <ComponentRef Id="cmpF9A19A624716EC2792CFAAAFB0B1DA6F" />
             <ComponentRef Id="cmpFAFF9F1B136267A4D1D3F332F91975E4" />
             <ComponentRef Id="cmp1CB1237395463F5DBA2E24A74D163C3B" />
             <ComponentRef Id="cmpE9F9299B41F7719DC925295C93B0730C" />
             <ComponentRef Id="cmp2AF0D9FFAE0A8455E3E02CED815CFBE0" />
+            <ComponentRef Id="cmpD7060DCB31E73FDFC031CBB3DAAAE9BE" />
+            <ComponentRef Id="cmp185738740FFAB6C487AC890DA24A298B" />
         </ComponentGroup>
     </Fragment>
 </Wix>
