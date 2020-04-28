@@ -1,0 +1,403 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{14410A5B-F007-43D0-AE37-D2A0B187B462}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DynamicsNav.Plugin</RootNamespace>
+    <AssemblyName>DynamicsNav.Plugin</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">.\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>C:\ProgramData\coolOrange\powerGateServer\Plugins\DynamicsNav\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <StartAction>Program</StartAction>
+    <StartProgram>$(MSBuildExtensionsPath64)\..\coolOrange\powerGateServer\powerGateServer.exe</StartProgram>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <StartAction>Program</StartAction>
+    <StartProgram>$(MSBuildExtensionsPath64)\..\coolOrange\powerGateServer\powerGateServer.exe</StartProgram>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="powerGateServer.SDK">
+      <HintPath>ReferenceAssemblies\powerGateServer.SDK.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Services" />
+    <Reference Include="System.Data.Services.Client" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Categories.cs" />
+    <Compile Include="Connected Services\SOAP.RecordLink\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="UnitsOfMeasure.cs" />
+    <Compile Include="Vendors.cs" />
+    <Compile Include="BomRows.cs" />
+    <Compile Include="BomHeaders.cs" />
+    <Compile Include="Connected Services\SOAP.BOMs\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\SOAP.ItemCard\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\SOAP.ItemCategoryCard\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\SOAP.NoSeriesLines\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\SOAP.UnitsOfMeasure\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\SOAP.Vendors\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Documents.cs" />
+    <Compile Include="Materials.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Connected Services\SOAP.BOMs\BOMs.wsdl" />
+    <None Include="Connected Services\SOAP.ItemCard\DynamicsNav.Plugin.SOAP.ItemCard.CreateMultiple_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.ItemCard\DynamicsNav.Plugin.SOAP.ItemCard.Create_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.ItemCard\DynamicsNav.Plugin.SOAP.ItemCard.Delete_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.ItemCard\DynamicsNav.Plugin.SOAP.ItemCard.GetRecIdFromKey_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.ItemCard\DynamicsNav.Plugin.SOAP.ItemCard.IsUpdated_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.ItemCard\DynamicsNav.Plugin.SOAP.ItemCard.ItemCard.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.ItemCard\DynamicsNav.Plugin.SOAP.ItemCard.ReadByRecId_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.ItemCard\DynamicsNav.Plugin.SOAP.ItemCard.ReadMultiple_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.ItemCard\DynamicsNav.Plugin.SOAP.ItemCard.Read_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.ItemCard\DynamicsNav.Plugin.SOAP.ItemCard.UpdateMultiple_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.ItemCard\DynamicsNav.Plugin.SOAP.ItemCard.Update_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.ItemCard\ItemCard.wsdl" />
+    <None Include="Connected Services\SOAP.ItemCategoryCard\DynamicsNav.Plugin.SOAP.ItemCategoryCard.CreateMultiple_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.ItemCategoryCard\DynamicsNav.Plugin.SOAP.ItemCategoryCard.Create_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.ItemCategoryCard\DynamicsNav.Plugin.SOAP.ItemCategoryCard.Delete_Attributes_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.ItemCategoryCard\DynamicsNav.Plugin.SOAP.ItemCategoryCard.GetRecIdFromKey_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.ItemCategoryCard\DynamicsNav.Plugin.SOAP.ItemCategoryCard.IsUpdated_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.ItemCategoryCard\DynamicsNav.Plugin.SOAP.ItemCategoryCard.ItemCategoryCard.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.ItemCategoryCard\DynamicsNav.Plugin.SOAP.ItemCategoryCard.ReadByRecId_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.ItemCategoryCard\DynamicsNav.Plugin.SOAP.ItemCategoryCard.ReadMultiple_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.ItemCategoryCard\DynamicsNav.Plugin.SOAP.ItemCategoryCard.Read_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.ItemCategoryCard\DynamicsNav.Plugin.SOAP.ItemCategoryCard.UpdateMultiple_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.ItemCategoryCard\DynamicsNav.Plugin.SOAP.ItemCategoryCard.Update_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.ItemCategoryCard\ItemCategoryCard.wsdl" />
+    <None Include="Connected Services\SOAP.NoSeriesLines\DynamicsNav.Plugin.SOAP.NoSeriesLines.CreateMultiple_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.NoSeriesLines\DynamicsNav.Plugin.SOAP.NoSeriesLines.Create_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.NoSeriesLines\DynamicsNav.Plugin.SOAP.NoSeriesLines.Delete_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.NoSeriesLines\DynamicsNav.Plugin.SOAP.NoSeriesLines.GetRecIdFromKey_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.NoSeriesLines\DynamicsNav.Plugin.SOAP.NoSeriesLines.IsUpdated_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.NoSeriesLines\DynamicsNav.Plugin.SOAP.NoSeriesLines.NoSeriesLines.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.NoSeriesLines\DynamicsNav.Plugin.SOAP.NoSeriesLines.ReadByRecId_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.NoSeriesLines\DynamicsNav.Plugin.SOAP.NoSeriesLines.ReadMultiple_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.NoSeriesLines\DynamicsNav.Plugin.SOAP.NoSeriesLines.Read_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.NoSeriesLines\DynamicsNav.Plugin.SOAP.NoSeriesLines.UpdateMultiple_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.NoSeriesLines\DynamicsNav.Plugin.SOAP.NoSeriesLines.Update_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.NoSeriesLines\NoSeriesLines.wsdl" />
+    <None Include="Connected Services\SOAP.BOMs\DynamicsNav.Plugin.SOAP.BOMs.BOMs.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.BOMs\DynamicsNav.Plugin.SOAP.BOMs.CreateMultiple_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.BOMs\DynamicsNav.Plugin.SOAP.BOMs.Create_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.BOMs\DynamicsNav.Plugin.SOAP.BOMs.Delete_ProdBOMLine_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.BOMs\DynamicsNav.Plugin.SOAP.BOMs.Delete_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.BOMs\DynamicsNav.Plugin.SOAP.BOMs.GetRecIdFromKey_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.BOMs\DynamicsNav.Plugin.SOAP.BOMs.IsUpdated_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.BOMs\DynamicsNav.Plugin.SOAP.BOMs.ReadByRecId_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.BOMs\DynamicsNav.Plugin.SOAP.BOMs.ReadMultiple_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.BOMs\DynamicsNav.Plugin.SOAP.BOMs.Read_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.BOMs\DynamicsNav.Plugin.SOAP.BOMs.UpdateMultiple_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.BOMs\DynamicsNav.Plugin.SOAP.BOMs.Update_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.RecordLink\DynamicsNav.Plugin.SOAP.RecordLink.CreateLink_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.RecordLink\DynamicsNav.Plugin.SOAP.RecordLink.DeleteLink_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.RecordLink\DynamicsNav.Plugin.SOAP.RecordLink.ModifyLink_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.RecordLink\DynamicsNav.Plugin.SOAP.RecordLink.ReadLinks_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.RecordLink\DynamicsNav.Plugin.SOAP.RecordLink.RecordLinks.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.RecordLink\RecordLink.wsdl" />
+    <None Include="Connected Services\SOAP.UnitsOfMeasure\DynamicsNav.Plugin.SOAP.UnitsOfMeasure.CreateMultiple_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.UnitsOfMeasure\DynamicsNav.Plugin.SOAP.UnitsOfMeasure.Create_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.UnitsOfMeasure\DynamicsNav.Plugin.SOAP.UnitsOfMeasure.Delete_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.UnitsOfMeasure\DynamicsNav.Plugin.SOAP.UnitsOfMeasure.GetRecIdFromKey_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.UnitsOfMeasure\DynamicsNav.Plugin.SOAP.UnitsOfMeasure.IsUpdated_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.UnitsOfMeasure\DynamicsNav.Plugin.SOAP.UnitsOfMeasure.ReadByRecId_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.UnitsOfMeasure\DynamicsNav.Plugin.SOAP.UnitsOfMeasure.ReadMultiple_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.UnitsOfMeasure\DynamicsNav.Plugin.SOAP.UnitsOfMeasure.Read_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.UnitsOfMeasure\DynamicsNav.Plugin.SOAP.UnitsOfMeasure.UnitsOfMeasure.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.UnitsOfMeasure\DynamicsNav.Plugin.SOAP.UnitsOfMeasure.UpdateMultiple_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.UnitsOfMeasure\DynamicsNav.Plugin.SOAP.UnitsOfMeasure.Update_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.UnitsOfMeasure\UnitsOfMeasure.wsdl" />
+    <None Include="Connected Services\SOAP.Vendors\DynamicsNav.Plugin.SOAP.Vendors.CreateMultiple_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.Vendors\DynamicsNav.Plugin.SOAP.Vendors.Create_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.Vendors\DynamicsNav.Plugin.SOAP.Vendors.Delete_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.Vendors\DynamicsNav.Plugin.SOAP.Vendors.GetRecIdFromKey_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.Vendors\DynamicsNav.Plugin.SOAP.Vendors.IsUpdated_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.Vendors\DynamicsNav.Plugin.SOAP.Vendors.ReadByRecId_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.Vendors\DynamicsNav.Plugin.SOAP.Vendors.ReadMultiple_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.Vendors\DynamicsNav.Plugin.SOAP.Vendors.Read_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.Vendors\DynamicsNav.Plugin.SOAP.Vendors.UpdateMultiple_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.Vendors\DynamicsNav.Plugin.SOAP.Vendors.Update_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.Vendors\DynamicsNav.Plugin.SOAP.Vendors.Vendors.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SOAP.Vendors\Vendors.wsdl" />
+    <None Include="Install\Record Link Handler.fob">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Test.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Install\Insert_Webservices.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Connected Services\SOAP.BOMs\configuration91.svcinfo" />
+    <None Include="Connected Services\SOAP.BOMs\configuration.svcinfo" />
+    <None Include="Connected Services\SOAP.BOMs\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\SOAP.ItemCard\configuration91.svcinfo" />
+    <None Include="Connected Services\SOAP.ItemCard\configuration.svcinfo" />
+    <None Include="Connected Services\SOAP.ItemCard\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\SOAP.ItemCategoryCard\configuration91.svcinfo" />
+    <None Include="Connected Services\SOAP.ItemCategoryCard\configuration.svcinfo" />
+    <None Include="Connected Services\SOAP.ItemCategoryCard\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\SOAP.NoSeriesLines\configuration91.svcinfo" />
+    <None Include="Connected Services\SOAP.NoSeriesLines\configuration.svcinfo" />
+    <None Include="Connected Services\SOAP.NoSeriesLines\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\SOAP.UnitsOfMeasure\configuration91.svcinfo" />
+    <None Include="Connected Services\SOAP.UnitsOfMeasure\configuration.svcinfo" />
+    <None Include="Connected Services\SOAP.UnitsOfMeasure\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\SOAP.Vendors\configuration91.svcinfo" />
+    <None Include="Connected Services\SOAP.Vendors\configuration.svcinfo" />
+    <None Include="Connected Services\SOAP.Vendors\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\SOAP.RecordLink\configuration91.svcinfo" />
+    <None Include="Connected Services\SOAP.RecordLink\configuration.svcinfo" />
+    <None Include="Connected Services\SOAP.RecordLink\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="DynamicsNav.Plugin.addin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\SOAP.BOMs\" />
+    <WCFMetadataStorage Include="Connected Services\SOAP.ItemCard\" />
+    <WCFMetadataStorage Include="Connected Services\SOAP.ItemCategoryCard\" />
+    <WCFMetadataStorage Include="Connected Services\SOAP.NoSeriesLines\" />
+    <WCFMetadataStorage Include="Connected Services\SOAP.RecordLink\" />
+    <WCFMetadataStorage Include="Connected Services\SOAP.UnitsOfMeasure\" />
+    <WCFMetadataStorage Include="Connected Services\SOAP.Vendors\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:tns="urn:microsoft-dynamics-schemas/codeunit/RecordLink" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/RecordLink" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <schema xmlns:tns="urn:microsoft-dynamics-nav/xmlports/x50150" elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-nav/xmlports/x50150" xmlns="http://www.w3.org/2001/XMLSchema">
+      <complexType name="RecordLink">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" default="0" name="LinkId" type="int" />
+          <element minOccurs="1" maxOccurs="1" name="RecordId" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Type" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Url1" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Content" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="RecordLinks" mixed="true">
+        <sequence>
+          <element minOccurs="1" maxOccurs="unbounded" name="RecordLink" type="tns:RecordLink" />
+        </sequence>
+      </complexType>
+      <element name="RecordLinks" type="tns:RecordLinks" />
+    </schema>
+    <schema elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/RecordLink" xmlns="http://www.w3.org/2001/XMLSchema">
+      <element name="ReadLinks">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="recordId" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="companyName" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="linkType" type="int" />
+            <element xmlns:q1="urn:microsoft-dynamics-nav/xmlports/x50150" minOccurs="1" maxOccurs="1" name="recordLinks" type="q1:RecordLinks" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="ReadLinks_Result">
+        <complexType>
+          <sequence>
+            <element xmlns:q2="urn:microsoft-dynamics-nav/xmlports/x50150" minOccurs="1" maxOccurs="1" name="recordLinks" type="q2:RecordLinks" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="CreateLink">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="recordId" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="companyName" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="linkType" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="content" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="url" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="linkIdOut" type="int" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="CreateLink_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="linkIdOut" type="int" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="ModifyLink">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="linkId" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="content" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="url" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="ModifyLink_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="DeleteLink">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="linkId" type="int" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="DeleteLink_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+    </schema>
+  </types>
+  <message name="ReadLinks">
+    <part name="parameters" element="tns:ReadLinks" />
+  </message>
+  <message name="ReadLinks_Result">
+    <part name="parameters" element="tns:ReadLinks_Result" />
+  </message>
+  <message name="CreateLink">
+    <part name="parameters" element="tns:CreateLink" />
+  </message>
+  <message name="CreateLink_Result">
+    <part name="parameters" element="tns:CreateLink_Result" />
+  </message>
+  <message name="ModifyLink">
+    <part name="parameters" element="tns:ModifyLink" />
+  </message>
+  <message name="ModifyLink_Result">
+    <part name="parameters" element="tns:ModifyLink_Result" />
+  </message>
+  <message name="DeleteLink">
+    <part name="parameters" element="tns:DeleteLink" />
+  </message>
+  <message name="DeleteLink_Result">
+    <part name="parameters" element="tns:DeleteLink_Result" />
+  </message>
+  <portType name="RecordLink_Port">
+    <operation name="ReadLinks">
+      <input name="ReadLinks" message="tns:ReadLinks" />
+      <output name="ReadLinks_Result" message="tns:ReadLinks_Result" />
+    </operation>
+    <operation name="CreateLink">
+      <input name="CreateLink" message="tns:CreateLink" />
+      <output name="CreateLink_Result" message="tns:CreateLink_Result" />
+    </operation>
+    <operation name="ModifyLink">
+      <input name="ModifyLink" message="tns:ModifyLink" />
+      <output name="ModifyLink_Result" message="tns:ModifyLink_Result" />
+    </operation>
+    <operation name="DeleteLink">
+      <input name="DeleteLink" message="tns:DeleteLink" />
+      <output name="DeleteLink_Result" message="tns:DeleteLink_Result" />
+    </operation>
+  </portType>
+  <binding name="RecordLink_Binding" type="tns:RecordLink_Port">
+    <binding transport="http://schemas.xmlsoap.org/soap/http" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    <operation name="ReadLinks">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/RecordLink:ReadLinks" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="ReadLinks">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="ReadLinks_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="CreateLink">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/RecordLink:CreateLink" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="CreateLink">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="CreateLink_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="ModifyLink">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/RecordLink:ModifyLink" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="ModifyLink">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="ModifyLink_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="DeleteLink">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/RecordLink:DeleteLink" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="DeleteLink">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="DeleteLink_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+  </binding>
+  <service name="RecordLink">
+    <port name="RecordLink_Port" binding="tns:RecordLink_Binding">
+      <address location="http://localhost:7047/DynamicsNAV100/WS/CRONUS%20International%20Ltd./Codeunit/RecordLink" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    </port>
+  </service>
+</definitions>
