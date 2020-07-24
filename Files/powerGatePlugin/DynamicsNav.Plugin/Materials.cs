@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Services.Common;
-using System.Net;
-using System.ServiceModel;
-using System.ServiceModel.Security;
+using System.Linq;
 using DynamicsNav.Plugin.SOAP.ItemCard;
 using DynamicsNav.Plugin.SOAP.NoSeriesLines;
 using powerGateServer.SDK;
@@ -20,14 +18,12 @@ namespace DynamicsNav.Plugin
         public string UnitOfMeasure { get; set; }
         public string Type { get; set; }
         public bool IsBlocked { get; set; }
+        public string Category { get; set; }
         public string Shelf { get; set; }
-        public decimal Weight { get; set; }
-        public string Dimensions { get; set; }
-        public bool IsVendorSpecified { get; set; }
-        public string VendorNumber { get; set; }
-        public string VendorName { get; set; }
-        public string VendorItemNumber { get; set; }
-        public decimal Cost { get; set; }
+        public string SearchDescription { get; set; }
+
+        //dynamicsnav://localhost:7046/DynamicsNAV100/CRONUS%20International%20Ltd./runpage?page=30&personalization=30&bookmark=21%3BGwAAAAJ7BTcAMAAxADAAMA%3D%3D&mode=Edit
+        //public string GoToLink { get; set; }
     }
 
     public class Materials : ServiceMethod<Material>
@@ -40,11 +36,14 @@ namespace DynamicsNav.Plugin
 
             var endpoint = WebService.GetServiceEndpoint<ItemCard_PortChannel>();
             var client = new ItemCard_PortClient(endpoint.Binding, endpoint.Address);
-            //client.ClientCredentials.SetCredentials();
 
             var filterArray = new List<ItemCard_Filter>();
             foreach (var w in expression.Where)
             {
+                var ciPrefix = "";
+                if (new [] {"Number", "Description", "Category", "Shelf", "SearchDescription" }.Contains(w.PropertyName))
+                    ciPrefix = "@";
+
                 var fieldEnum = w.PropertyName.ToItemCardFieldEnum();
                 if (fieldEnum == null) continue;
 
@@ -54,7 +53,7 @@ namespace DynamicsNav.Plugin
                 filterArray.Add(new ItemCard_Filter
                 {
                     Field = fieldEnum.Value, 
-                    Criteria = criteria
+                    Criteria = ciPrefix + criteria
                 });
             }
             var list = client.ReadMultiple(filterArray.ToArray(), null, expression.TopCount);
@@ -199,10 +198,7 @@ namespace DynamicsNav.Plugin
                 case "IsBlocked": return ItemCard_Fields.Blocked;
                 case "Category": return ItemCard_Fields.Item_Category_Code;
                 case "Shelf": return ItemCard_Fields.Shelf_No;
-                case "Weight": return ItemCard_Fields.Net_Weight;
-                case "VendorNumber": return ItemCard_Fields.Vendor_No;
-                case "VendorItemNumber": return ItemCard_Fields.Vendor_Item_No;
-                case "Cost": return ItemCard_Fields.Unit_Cost;
+                case "SearchDescription": return ItemCard_Fields.Search_Description;
                 default: return null;
             }
         }
@@ -217,14 +213,9 @@ namespace DynamicsNav.Plugin
                 UnitOfMeasure = item.Base_Unit_of_Measure,
                 Type = item.Type == SOAP.ItemCard.Type.Inventory ? "Inventory" : "Service",
                 IsBlocked = item.Blocked,
+                Category = item.Item_Category_Code,
                 Shelf = item.Shelf_No,
-                Weight = item.Net_Weight,
-                Dimensions = "",
-                VendorNumber = item.Vendor_No,
-                IsVendorSpecified = !string.IsNullOrEmpty(item.Vendor_No),
-                VendorName = !string.IsNullOrEmpty(item.Vendor_No) ? Vendors.GetVendor(item.Vendor_No).Name : "",
-                VendorItemNumber = item.Vendor_Item_No,
-                Cost = item.Unit_Cost
+                SearchDescription = item.Search_Description
             };
         }
 
@@ -234,13 +225,12 @@ namespace DynamicsNav.Plugin
             item.Description = material.Description;
             //item.Last_Date_Modified = material.ModifiedDate;
             item.Base_Unit_of_Measure = material.UnitOfMeasure;
+            item.TypeSpecified = true;
             item.Type = material.Type == "Inventory" ? SOAP.ItemCard.Type.Inventory : SOAP.ItemCard.Type.Service;
             item.Blocked = material.IsBlocked;
+            item.Item_Category_Code = material.Category;
             item.Shelf_No = material.Shelf;
-            item.Net_Weight = material.Weight;
-            item.Vendor_No = material.VendorNumber;
-            item.Vendor_Item_No = material.VendorItemNumber;
-            item.Unit_Cost = material.Cost;
+            item.Search_Description = material.SearchDescription;
             return item;
         }
     }

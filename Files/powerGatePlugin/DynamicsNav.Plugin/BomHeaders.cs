@@ -18,6 +18,9 @@ namespace DynamicsNav.Plugin
         public string UnitOfMeasure { get; set; }
         public DateTime ModifiedDate { get; set; }
 
+        //dynamicsnav://localhost:7046/DynamicsNAV100/CRONUS%20International%20Ltd./runpage?page=99000786&personalization=99000786&bookmark=21%3Bw6HmBQJ7BTcAMAAwADYAMw%3D%3D&mode=Edit
+        //public string GoToLink { get; set; }
+
         public List<BomRow> BomRows { get; set;  }
 
         public BomHeader()
