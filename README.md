@@ -1,3 +1,5 @@
+[![Build Status](https://dev.azure.com/CoolOrange/LABS/_apis/build/status/powergate-dynamics-nav-sample?branchName=master)](https://dev.azure.com/CoolOrange/LABS/_build/latest?definitionId=112&branchName=master)
+
 # powergate-dynamics-nav-sample
 
 [![Windows](https://img.shields.io/badge/Platform-Windows-lightgray.svg)](https://www.microsoft.com/en-us/windows/)
