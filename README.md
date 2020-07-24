@@ -17,6 +17,9 @@ THE USAGE OF THIS SAMPLE IS AT YOUR OWN RISK AND **THERE IS NO SUPPORT** RELATED
 
 powerGate Server Plugin that connects to Microsoft Dynamics NAV
 
+Microsoft Dynamics NAV Trial:
+https://docs.microsoft.com/en-us/dynamics-nav/properties-of-the-demo-license
+
 ## Product Documentation
 
 [coolOrange powerGate](https://www.coolorange.com/wiki/doku.php?id=powergate)  

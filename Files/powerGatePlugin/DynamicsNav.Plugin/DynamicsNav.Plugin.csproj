@@ -331,9 +331,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Install\Insert_Webservices.sql">
+    <Content Include="Install\Insert Web Services.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="URLACL.txt" />
     <None Include="Connected Services\SOAP.BOMs\configuration91.svcinfo" />
     <None Include="Connected Services\SOAP.BOMs\configuration.svcinfo" />
     <None Include="Connected Services\SOAP.BOMs\Reference.svcmap">
