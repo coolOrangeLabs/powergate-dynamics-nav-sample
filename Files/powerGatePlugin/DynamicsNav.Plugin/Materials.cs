@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Services.Common;
 using System.Linq;
+using System.Web;
 using DynamicsNav.Plugin.SOAP.ItemCard;
 using DynamicsNav.Plugin.SOAP.NoSeriesLines;
 using powerGateServer.SDK;
@@ -21,9 +22,7 @@ namespace DynamicsNav.Plugin
         public string Category { get; set; }
         public string Shelf { get; set; }
         public string SearchDescription { get; set; }
-
-        //dynamicsnav://localhost:7046/DynamicsNAV100/CRONUS%20International%20Ltd./runpage?page=30&personalization=30&bookmark=21%3BGwAAAAJ7BTcAMAAxADAAMA%3D%3D&mode=Edit
-        //public string GoToLink { get; set; }
+        public string Link { get; set; }
     }
 
     public class Materials : ServiceMethod<Material>
@@ -215,8 +214,28 @@ namespace DynamicsNav.Plugin
                 IsBlocked = item.Blocked,
                 Category = item.Item_Category_Code,
                 Shelf = item.Shelf_No,
-                SearchDescription = item.Search_Description
+                SearchDescription = item.Search_Description,
+                Link = GetItemLink(item.Key)
             };
+        }
+
+        private static string GetItemLink(string key)
+        {
+            //https://docs.microsoft.com/en-us/dynamics-nav/creating-and-running-hyperlinks
+            var endpoint = WebService.GetServiceEndpoint<ItemCard_PortChannel>();
+            var server = endpoint.Address.Uri.Host;
+            var port = 7046;
+            var instance = endpoint.Address.Uri.Segments[1].TrimEnd('/');
+            var company = Uri.EscapeUriString(WebService.Company);
+
+            var sections = key.Split(new[] { ';' }, 2);
+            var valueLength = int.Parse(sections[0]);
+            var value = sections[1].Substring(0, valueLength);
+            var bytes = Convert.FromBase64String(value);
+            var length = bytes.Length + valueLength.ToString().Length + HttpUtility.UrlEncode(";").Length;
+            var bookmark = HttpUtility.UrlEncode(length + ";" + value);
+
+            return $"dynamicsnav://{server}:{port}/{instance}/{company}/runpage?page=30&personalization=30&bookmark={bookmark}";
         }
 
         public static ItemCard ToErpObject(this Material material, ItemCard item)

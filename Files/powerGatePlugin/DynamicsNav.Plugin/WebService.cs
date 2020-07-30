@@ -53,7 +53,7 @@ namespace DynamicsNav.Plugin
             var channelEndpointElement = serviceModelSectionGroup?.Client.Endpoints.OfType<ChannelEndpointElement>().First(e => e.Contract == contractAttribute?.ConfigurationName);
             var channelFactory = new ConfigurationChannelFactory<T>(channelEndpointElement.Name, configuration, null);
             
-            var binding = channelFactory.Endpoint.Binding as BasicHttpBinding;
+            //var binding = channelFactory.Endpoint.Binding as BasicHttpBinding;
             //binding.Security.Mode = BasicHttpSecurityMode.TransportCredentialOnly;
             //binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
             //binding.Security.Transport.ProxyCredentialType = HttpProxyCredentialType.None;
